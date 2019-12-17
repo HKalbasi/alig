@@ -4,7 +4,6 @@ import Tab from 'react-bootstrap/Tab';
 import Container from 'react-bootstrap/Container';
 import Head from 'next/head';
 import FS from '../components/fs';
-import Router from "next/router";
 
 const Home = () => (
   <Container className="p-3">
@@ -22,7 +21,7 @@ const Home = () => (
       branch: master
     </div>
     <div>
-      <Tabs id="controlled-tab-example" onSelect={k => Router.push("/tree/x")}>
+      <Tabs id="controlled-tab-example">
         <Tab eventKey="code" title="Code">
           <FS tree="c534a93d25a7f897a37f80eb9737f71cbb51e1ac"/>
         </Tab>
