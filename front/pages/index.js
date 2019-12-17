@@ -23,7 +23,7 @@ const Home = () => (
     <div>
       <Tabs id="controlled-tab-example">
         <Tab eventKey="code" title="Code">
-          <FS tree="f0663673d6ff13d90b30e2ab5daa8f39aa0f41ab"/>
+          <FS tree="c534a93d25a7f897a37f80eb9737f71cbb51e1ac"/>
         </Tab>
         <Tab eventKey="issues" title="Issues / Merge requests">
           y

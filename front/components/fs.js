@@ -1,7 +1,8 @@
 import React from "react";
 import { getFromApi } from "../api.mjs";
+import Link from "next/link";
 
-const FS = class extends React.Component { // you can't use stateless component because you need a state
+const FS = class extends React.Component {
   constructor () {
     super()
     this.state = { loaded: false }
@@ -9,16 +10,20 @@ const FS = class extends React.Component { // you can't use stateless component 
   async componentDidMount() {
     try{
       const res = await getFromApi(`objects/${this.props.tree}`);
-      console.log(res);
       this.setState({ loaded: true, value: res});  
     }
     catch(e) {
-      this.setState({ loaded: true, value: e});
+      this.setState({ loaded: true, value: e.toString()});
     }
   }
   render () {
     if (!this.state.loaded) return <div>loading</div>
-    return <div>{JSON.stringify(this.state.value)}</div>
+    const elems = this.state.value.data.map(x =>
+      <div>
+        <Link href={`/${x.ref}`}>{x.name}</Link>
+      </div>
+    )
+    return <div>{elems}</div>
   }
 };
 
