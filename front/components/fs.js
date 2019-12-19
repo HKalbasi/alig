@@ -20,7 +20,7 @@ const FS = class extends React.Component {
     if (!this.state.loaded) return <div>loading</div>
     const elems = this.state.value.data.map(x =>
       <div>
-        <Link href={`/${x.ref}`}>{x.name}</Link>
+        <Link href={`/tree/${x.ref}`}>{x.name}</Link>
       </div>
     )
     return <div>{elems}</div>

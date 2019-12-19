@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Head from 'next/head';
 import FS from '../components/fs';
 
-const Home = () => (
+const Home = (props) => (
   <Container className="p-3">
     <Head>
       <link
@@ -23,7 +23,7 @@ const Home = () => (
     <div>
       <Tabs id="controlled-tab-example">
         <Tab eventKey="code" title="Code">
-          <FS tree="c534a93d25a7f897a37f80eb9737f71cbb51e1ac"/>
+          <FS tree="c534a93d25a7f897a37f80eb9737f71cbb51e1ac" xxx={console.log(props.url.query)}/>
         </Tab>
         <Tab eventKey="issues" title="Issues / Merge requests">
           y
