@@ -1,19 +1,25 @@
 import http from "http";
-import next from "next";
 import { restHandlerBuilder } from "./rest/index.mjs";
-import frontRoutes from "./front/routes.mjs";
+import koa from "koa";
+import koaSend from "koa-send";
 
 const restHandler = restHandlerBuilder('/rest', '.');
 
+const frontHandler = (new koa()).use(async (ctx) => {
+  if (ctx.path == '/dist/main.js') {
+    await koaSend(ctx, 'front/dist/main.js');
+  }
+  else {
+    await koaSend(ctx, 'front/index.html');
+  }
+}).callback();
+
 const main = async () => {
-  const app = next({ dev: true, dir: './front' });
-  await app.prepare();
-  const handle = frontRoutes.getRequestHandler(app);
   const server = http.createServer((req, res) => {
     if (req.url.substring(0,5) == '/rest'){
       restHandler(req, res);
     }
-    else handle(req,res);
+    else frontHandler(req,res);
   });
   server.listen(8080);
 };
