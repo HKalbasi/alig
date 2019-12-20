@@ -3,7 +3,7 @@ import { restHandlerBuilder } from "./rest/index.mjs";
 import koa from "koa";
 import koaSend from "koa-send";
 
-const restHandler = restHandlerBuilder('/rest', '.');
+const restHandler = restHandlerBuilder('', '.');
 
 const frontHandler = (new koa()).use(async (ctx) => {
   if (ctx.path == '/dist/main.js') {

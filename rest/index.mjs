@@ -2,9 +2,10 @@ import Koa from "koa";
 import KoaRestRouter from "koa-rest-router";
 import { objectList, readObject } from "../gitEngine/git.mjs";
 
-export const restHandlerBuilder = (prefix, gitDir) => {
+export const restHandlerBuilder = (prefixWithoutRest, gitDir) => {
+  const prefix = `${prefixWithoutRest}/rest`;
   const app = new Koa();
-  const router = KoaRestRouter({ prefix: '/rest' });
+  const router = KoaRestRouter({ prefix });
   
   router.resource('object', {
     index: async (ctx) => {
@@ -23,7 +24,14 @@ export const restHandlerBuilder = (prefix, gitDir) => {
       ctx.app.emit('error', err, ctx);
     }
   });
+  app.use(async (ctx, next) => {
+    if (ctx.url.substr(prefix.length,7) === '/byPath') {
+      ctx.body = 'bikhial :)';
+    }
+    else {
+      await next();
+    }
+  });
   app.use(router.middleware());
-    
   return app.callback();
 };
