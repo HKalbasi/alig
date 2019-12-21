@@ -28,6 +28,10 @@ export const addressOfObject = (adr, objHash) => {
   return path.join(adr, '.git/objects', objHash.slice(0, 2), objHash.slice(2));
 };
 
+export const addressOfBranch = (adr, branch) => {
+  return path.join(adr, '.git/refs/heads', branch);
+};
+
 export const readObject = async (adr, objHash) => {
   const objAdr = addressOfObject(adr, objHash);
   const buf = await unzip(await readFile(objAdr));
@@ -136,4 +140,9 @@ export const writeObject = async (adr, obj) => {
   const zipped = await zip(buf);
   await writeRecursive(addressOfObject(adr, sha), zipped);
   return sha;
+};
+
+export const branchToCommit = async (adr, branch) => {
+  const badr = addressOfBranch(adr, branch);
+  return (await readFile(badr)).slice(0, 40).toString();
 };
