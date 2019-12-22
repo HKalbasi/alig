@@ -18,11 +18,17 @@ export const FilePage = {
   template:
 `<div>
   <div v-if="loading">loading</div>
-  <div v-if="!loading">
-    <div v-for="x in data">
-      {{x.name}}
-    </div>
-  </div>
+  <table v-if="!loading" class="ui single line table">
+    <tbody>
+      <tr v-for="x in data">
+        <td>
+          <router-link :to="'/master/'+x.name">
+          {{x.name}}
+          </router-link>
+        </td>
+      </tr>
+    </tbody>
+  </table>
   
 </div>
 `
