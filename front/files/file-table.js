@@ -1,6 +1,6 @@
 import { getFromApi } from "../api.mjs";
 
-export const FilePage = {
+export const FileTable = {
   props: ['commit'],
   data: function() {
     return {

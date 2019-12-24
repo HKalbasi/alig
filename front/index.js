@@ -1,11 +1,11 @@
 import VueRouter from "vue-router";
 import Vue from "vue";
 import { TabHeader } from "./tab-header.js";
-import { FilePage } from "./files/file-page.js";
+import { FileTable } from "./files/file-page.js";
 
 Vue.use(VueRouter);
 Vue.component('tab-header', TabHeader);
-Vue.component('file-path', FilePage);
+Vue.component('file-table', FileTable);
 
 const p404 = {
   template: '<div> 404 not found </div>'
@@ -16,7 +16,7 @@ const home = {
 <div> 
   <tab-header></tab-header> 
   <div class="ui container">
-    <file-path commit="x"></file-path>
+    <file-table commit="x"></file-table>
   </div>
 </div>
 `,
