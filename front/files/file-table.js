@@ -1,35 +1,38 @@
 import { getFromApi } from "../api.mjs";
 
 export const FileTable = {
-  props: ['commit'],
+  props: ['branch', 'path'],
   data: function() {
     return {
       loading: true,
-      data: [],
+      obj: [],
     };
   },
   mounted: async function () {
     console.log('salam');
-    const res = await getFromApi('byPath/master');
+    const res = await getFromApi(`byPath/${this.branch}/${this.path}`);
     console.log(res);
     this.loading = false;
-    this.data = res.data;
+    this.obj = res;
   },
   template:
 `<div>
   <div v-if="loading">loading</div>
-  <table v-if="!loading" class="ui single line table">
+  <table v-if="!loading && obj.type === 'tree'" class="ui single line table">
     <tbody>
-      <tr v-for="x in data">
+      <tr v-for="x in obj.data">
         <td>
-          <router-link :to="'/master/'+x.name">
+          <router-link :to="'/'+window.pathJoin([branch,'file',path,x.name])">
           {{x.name}}
           </router-link>
         </td>
       </tr>
     </tbody>
   </table>
-  
+  <div v-if="!loading && obj.type === 'blob'" class="ui existing segment">
+    <div class="ui top attached label">{{path}}</div>
+    <div> {{obj.data}} </div>
+  </div>
 </div>
 `
 }

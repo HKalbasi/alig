@@ -1,11 +1,15 @@
 import VueRouter from "vue-router";
 import Vue from "vue";
 import { TabHeader } from "./tab-header.js";
-import { FileTable } from "./files/file-page.js";
+import { FileTable } from "./files/file-table.js";
+import { FilePage } from "./files/file-page.js"; 
 
 Vue.use(VueRouter);
 Vue.component('tab-header', TabHeader);
 Vue.component('file-table', FileTable);
+Vue.component('file-page', FilePage);
+
+window.pathJoin = (x) => x.join('/').replace(/\/+/g,'/');
 
 const p404 = {
   template: '<div> 404 not found </div>'
@@ -13,18 +17,19 @@ const p404 = {
 const home = {
   template: 
 `
-<div> 
-  <tab-header></tab-header> 
-  <div class="ui container">
-    <file-table commit="x"></file-table>
-  </div>
-</div>
+<file-page branch="master" path=""></file-page>
 `,
 };
 
 const tree = {
   template: '<div> here is file {{$route.params.path}} </div>',
 };
+
+const BranchHome = {
+  template: `
+<file-page :branch="$route.params.branch" :path="$route.params.path || ''">
+</file-page>`,
+}
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
@@ -33,7 +38,7 @@ const tree = {
 // We'll talk about nested routes later.
 const routes = [
   { path: '/', component: home },
-  { path: '/tree/:path*', component: tree },
+  { path: '/:branch/file/:path*', component: BranchHome },
   { path: '*', component: p404 },
 ]
 
