@@ -29,7 +29,7 @@ const main = async () => {
     if (req.url.substring(0,5) == '/rest'){
       restHandler(req, res);
     }
-    if (req.url.substring(0,9) === '/alig.git') {
+    else if (req.url.substring(0,9) === '/alig.git') {
       req.url = req.url.slice(9);
       gitSmartHttp(req,res);
     }
