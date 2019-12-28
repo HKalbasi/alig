@@ -3,11 +3,13 @@ import Vue from "vue";
 import { TabHeader } from "./tab-header.js";
 import { FileTable } from "./files/file-table.js";
 import { FilePage } from "./files/file-page.js"; 
+import { IssueIndexerPage } from "./issues/indexer-page.js";
 
 Vue.use(VueRouter);
 Vue.component('tab-header', TabHeader);
 Vue.component('file-table', FileTable);
 Vue.component('file-page', FilePage);
+Vue.component('issue-indexer-page', IssueIndexerPage);
 
 window.pathJoin = (x) => x.join('/').replace(/\/+/g,'/');
 
@@ -29,7 +31,13 @@ const BranchHome = {
   template: `
 <file-page :branch="$route.params.branch" :path="$route.params.path || ''">
 </file-page>`,
-}
+};
+
+const IssueHome = {
+  template: `
+  <issue-indexer-page :branch="$route.params.branch"></issue-indexer-page>
+  `
+};
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
@@ -39,6 +47,7 @@ const BranchHome = {
 const routes = [
   { path: '/', component: home },
   { path: '/:branch/file/:path*', component: BranchHome },
+  { path: '/:branch/issues/', component: IssueHome },
   { path: '*', component: p404 },
 ]
 
