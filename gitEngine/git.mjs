@@ -42,7 +42,7 @@ export const readObject = async (adr, objHash) => {
       while (buf[i] !== 0) i++;
       return {
         type: "blob",
-        data: buf.slice(i + 1),
+        data: buf.slice(i + 1).toString('base64'),
       };
     }
     case "comm": {

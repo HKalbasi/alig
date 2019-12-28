@@ -31,7 +31,7 @@ export const FileTable = {
   </table>
   <div v-if="!loading && obj.type === 'blob'" class="ui existing segment">
     <div class="ui top attached label">{{path}}</div>
-    <div> {{obj.data}} </div>
+    <pre>{{window.atob(obj.data)}}</pre>
   </div>
 </div>
 `
