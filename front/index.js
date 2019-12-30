@@ -62,6 +62,7 @@ const router = new VueRouter({
 })
 
 window.projectName = 'alig';
+window.cloneURL = `${window.location.protocol}//${window.location.host}/${window.projectName}.git`;
 
 const app = new Vue({
   router

@@ -6,7 +6,7 @@ const template = `<div class="header-wrapper">
 
 			<a href="/"> {{ window.projectName }} </a>
 
-			<div class="ui stackable secondary menu mobile--margin-between-items mobile--no-negative-margins">
+			<div class="ui container stackable secondary menu mobile--margin-between-items mobile--no-negative-margins">
 				<div class="fitted item choose reference">
 					<div data-can-create-branch="false" data-no-results="No results found."
 						class="ui floating filter dropdown custom">
@@ -30,32 +30,11 @@ const template = `<div class="header-wrapper">
 
 					<div class="ui action tiny input" id="clone-panel">
 
-						<button class="ui basic clone button blue" id="repo-clone-https"
-							data-link="https://gitea.com/gitea/go-sdk.git">
-							HTTPS
+						<input id="repo-clone-url" :value="window.cloneURL" readonly="">
+
+            <button @click="Clipboard.writeText(window.cloneURL)" class="ui basic icon button poping up clipboard">
+             COPY
 						</button>
-
-
-
-						<input id="repo-clone-url" value="https://gitea.com/gitea/go-sdk.git" readonly="">
-
-
-						<button class="ui basic icon button poping up clipboard" id="clipboard-btn" data-original="Copy"
-							data-success="Link has been copied" data-error="Use ⌘C or Ctrl-C to copy" data-content="Copy"
-							data-variation="inverted tiny" data-clipboard-target="#repo-clone-url">
-							<i class="octicon octicon-clippy"></i>
-						</button>
-
-						<div class="ui basic jump dropdown icon button poping up" data-content="Download Repository"
-							data-variation="tiny inverted" data-position="top right" tabindex="0">
-							<i class="download icon"></i>
-							<div class="menu hidden transition" tabindex="-1">
-								<a class="item" href="/gitea/go-sdk/archive/master.zip" tabindex="-1"><i
-										class="octicon octicon-file-zip"></i> ZIP</a>
-								<a class="item" href="/gitea/go-sdk/archive/master.tar.gz" tabindex="-1"><i
-										class="octicon octicon-file-zip"></i> TAR.GZ</a>
-							</div>
-						</div>
 					</div>
 
 				</div>
@@ -66,7 +45,7 @@ const template = `<div class="header-wrapper">
 	<header-tabs :selectedTab="selectedTab" :branch="branch"></header-tabs>
 </div>`;
 
-const props = ['projectName', 'branch', 'selectedTab'];
+const props = ['branch', 'selectedTab'];
 
 export const HeaderRoot = {
   template,
