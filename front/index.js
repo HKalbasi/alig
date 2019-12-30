@@ -1,6 +1,6 @@
 import VueRouter from "vue-router";
 import Vue from "vue";
-import { TabHeader } from "./tab-header.js";
+import { TabHeader } from "./header/tab-header.js";
 import { FileTable } from "./files/file-table.js";
 import { FilePage } from "./files/file-page.js"; 
 import { IssueIndexerPage } from "./issues/indexer-page.js";
