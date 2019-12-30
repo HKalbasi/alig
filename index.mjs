@@ -31,6 +31,15 @@ const main = async () => {
     }
     else if (req.url.substring(0,9) === '/alig.git') {
       req.url = req.url.slice(9);
+      console.log(req.url, req.headers);
+      if (req.url === '/info/refs?service=git-receive-pack') {
+        if (req.headers['authorization'] !== 'Basic aGFtaWQ6cmV6YQ==') {
+          res.statusCode = 401;
+          res.setHeader('WWW-Authenticate', 'Basic');
+          res.end();
+          return;  
+        }
+      }
       gitSmartHttp(req,res);
     }
     else frontHandler(req,res);
