@@ -1,12 +1,12 @@
 import VueRouter from "vue-router";
 import Vue from "vue";
-import { TabHeader } from "./header/tab-header.js";
+import { HeaderRoot } from "./header/header-root.js";
 import { FileTable } from "./files/file-table.js";
 import { FilePage } from "./files/file-page.js"; 
 import { IssueIndexerPage } from "./issues/indexer-page.js";
 
 Vue.use(VueRouter);
-Vue.component('tab-header', TabHeader);
+Vue.component('header-root', HeaderRoot);
 Vue.component('file-table', FileTable);
 Vue.component('file-page', FilePage);
 Vue.component('issue-indexer-page', IssueIndexerPage);

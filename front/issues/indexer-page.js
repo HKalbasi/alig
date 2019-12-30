@@ -3,7 +3,7 @@ export const IssueIndexerPage = {
   template:
 `
 <div :key="branch">
-  <tab-header :branch="branch" selectedTab="issues"></tab-header>
+  <header-root :branch="branch" selectedTab="issues"></header-root>
   <div class="ui container">
     Not implemented
   </div>

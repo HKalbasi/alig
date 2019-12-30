@@ -2,7 +2,7 @@ export const FilePage = {
   props: ['branch', 'path'],
   template: 
 `<div :key="branch+'/'+path">
-  <tab-header :branch="branch" selectedTab="file"></tab-header>
+  <header-root :branch="branch" selectedTab="file"></header-root>
   <div class="ui container">
     <file-table :branch="branch" :path="path"></file-table>
   </div>
