@@ -90,7 +90,7 @@ const template =
 
 const props = ['projectName', 'branch', 'selectedTab'];
 
-export const TabHeader = {
+export const HeaderRoot = {
   template,
   methods: {
     tabCss: function(id) {
