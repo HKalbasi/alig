@@ -5,7 +5,8 @@ import koaSend from "koa-send";
 import cgi from "cgi";
 import path from "path";
 
-const restHandler = restHandlerBuilder('', '.');
+const repoPath = path.resolve(process.argv[2]);
+const restHandler = restHandlerBuilder('', repoPath);
 
 const frontHandler = (new koa()).use(async (ctx) => {
   if (ctx.path == '/dist/main.js') {
@@ -20,7 +21,7 @@ const gitSmartHttp = cgi('git', {
   args: ['http-backend'],
   env: {
     GIT_HTTP_EXPORT_ALL: true,
-    GIT_PROJECT_ROOT: path.resolve('.'),
+    GIT_PROJECT_ROOT: repoPath,
   },
 });
 
