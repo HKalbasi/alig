@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<issue>
+  <head>
+    <title>گزارش یک باگ</title>
+    <time>2020-01-08T11:16:37.497Z</time>
+  </head>
+  <body>
+    <comment>
+      <author>
+        <name>HKalbasi</name>
+        <email>kalbasi@ce.sharif.edu</email>
+        <time>2020-01-08T11:16:37.497Z</time>
+      </author>
+      <text>
+        ایشو ها درست نمایش داده نمی شوند.
+      </text>
+    </comment>
+  </body>
+</issue>
