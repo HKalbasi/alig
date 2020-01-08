@@ -4,6 +4,10 @@ import koa from "koa";
 import koaSend from "koa-send";
 import cgi from "cgi";
 import path from "path";
+import git from "isomorphic-git";
+import fs from "fs";
+
+git.plugins.set('fs', fs);
 
 const repoPath = path.resolve(process.argv[2]);
 const restHandler = restHandlerBuilder('', repoPath);

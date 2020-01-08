@@ -1,4 +1,4 @@
-import { readObject, branchToCommit } from "./git.mjs";
+import { readObject, branchToCommit } from "./wrapper.mjs";
 
 export const getTreeOfBranch = async (adr, branch) => {
   const commitHash = await branchToCommit(adr, branch);

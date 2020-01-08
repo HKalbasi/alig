@@ -1,6 +1,7 @@
 import Koa from "koa";
 import KoaRestRouter from "koa-rest-router";
-import { objectList, readObject } from "../gitEngine/git.mjs";
+import { objectList } from "../gitEngine/git.mjs";
+import { readObject } from "../gitEngine/wrapper.mjs";
 import { getTreeOfBranch } from "../gitEngine/shortcut.mjs";
 
 export const restHandlerBuilder = (prefixWithoutRest, gitDir) => {
