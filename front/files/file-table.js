@@ -9,9 +9,7 @@ export const FileTable = {
     };
   },
   mounted: async function () {
-    console.log('salam');
     const res = await getFromApi(`byPath/${this.branch}/${this.path}`);
-    console.log(res);
     this.loading = false;
     this.obj = res;
   },
