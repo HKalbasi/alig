@@ -63,6 +63,9 @@ const router = new VueRouter({
 
 window.projectName = 'alig';
 window.cloneURL = `${window.location.protocol}//${window.location.host}/${window.projectName}.git`;
+window.atobUTF8 = (sBase64) => {
+	return Buffer.from(sBase64,'base64').toString('UTF8');
+};
 
 const app = new Vue({
   router
