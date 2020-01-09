@@ -617,6 +617,11 @@ safe-buffer@^5.0.1, safe-buffer@~5.2.0:
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.2.0.tgz#b74daec49b1148f88c64b68d49b1e815c1f2f519"
   integrity sha512-fZEwUGbVl7kouZs1jCdMLdt95hdIv0ZeHg6L7qPeciMZhZ+/gdesW4wgTARkrFWEpspjEATAzUGPG8N2jJiwbg==
 
+sax@0.5.x:
+  version "0.5.8"
+  resolved "https://registry.yarnpkg.com/sax/-/sax-0.5.8.tgz#d472db228eb331c2506b0e8c15524adb939d12c1"
+  integrity sha1-1HLbIo6zMcJQaw6MFVJK25OdEsE=
+
 set-getter@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/set-getter/-/set-getter-0.1.0.tgz#d769c182c9d5a51f409145f2fba82e5e86e80376"
@@ -751,6 +756,26 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
+
+xml2js@~0.2.6:
+  version "0.2.8"
+  resolved "https://registry.yarnpkg.com/xml2js/-/xml2js-0.2.8.tgz#9b81690931631ff09d1957549faf54f4f980b3c2"
+  integrity sha1-m4FpCTFjH/CdGVdUn69U9PmAs8I=
+  dependencies:
+    sax "0.5.x"
+
+xmlbuilder@~0.4.2:
+  version "0.4.3"
+  resolved "https://registry.yarnpkg.com/xmlbuilder/-/xmlbuilder-0.4.3.tgz#c4614ba74e0ad196e609c9272cd9e1ddb28a8a58"
+  integrity sha1-xGFLp04K0ZbmCcknLNnh3bKKilg=
+
+xmljson@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/xmljson/-/xmljson-0.2.0.tgz#e2d121d13c682c6964f6ae9c1a0be8a3cce8866c"
+  integrity sha1-4tEh0TxoLGlk9q6cGgvoo8zohmw=
+  dependencies:
+    xml2js "~0.2.6"
+    xmlbuilder "~0.4.2"
 
 ylru@^1.2.0:
   version "1.2.1"
