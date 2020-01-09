@@ -18,7 +18,7 @@ export const IssueIndexerPage = {
   <header-root :branch="branch" selectedTab="issues"></header-root>
   <div class="ui container">
     <div v-if="loading">loading</div>
-    <div v-if="!loading && obj.type === 'tree'">
+    <div class="issue list" v-if="!loading && obj.type === 'tree'">
       <li class="item" v-for="x in obj.data">
         <div class="ui white label">#{{x.name}}</div>
         <a class="title has-emoji" href="/gitea/go-sdk/issues/187">Add CRUD methods for repository files</a>

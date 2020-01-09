@@ -13,8 +13,8 @@ const repoPath = path.resolve(process.argv[2]);
 const restHandler = restHandlerBuilder('', repoPath);
 
 const frontHandler = (new koa()).use(async (ctx) => {
-  if (ctx.path == '/dist/main.js') {
-    await koaSend(ctx, 'front/dist/main.js');
+  if (ctx.path.substr(0,6) == '/dist/') {
+    await koaSend(ctx, 'front/dist/'+ctx.path.substr(6));
   }
   else {
     await koaSend(ctx, 'front/index.html');
