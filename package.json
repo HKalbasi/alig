@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "base58": "^2.0.1",
     "cgi": "^0.3.1",
     "crypto-js": "^3.1.9-1",
     "isomorphic-git": "^0.72.1",
