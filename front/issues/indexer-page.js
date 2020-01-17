@@ -1,4 +1,8 @@
 import { getFromApi } from "../api.mjs";
+import { to_json } from "xmljson";
+import { promisify } from "util";
+
+const xmlToJson = promisify(to_json);
 
 export const IssueIndexerPage = {
   props: ['branch'],
@@ -17,11 +21,13 @@ export const IssueIndexerPage = {
     }));
     console.log(this.obj);
     await Promise.all(res.map(async (x,i) => {
-      const all = window.atobUTF8((await getFromApi(`byPath/${this.branch}/.issues/${x.name}`)).data);
+      const xml = window.atobUTF8((await getFromApi(`byPath/${this.branch}/.issues/${x.name}`)).data);
+      const json = (await xmlToJson(xml)).issue;
+      console.log(json);
       this.$set(this.obj, i , {
         loading: false,
         id: x.name,
-        text: all,
+        meta: json.head,
       });
     }));
   },
@@ -32,20 +38,20 @@ export const IssueIndexerPage = {
     <div v-if="loading">loading</div>
     <div class="issue list" v-else>
       <li class="item" v-for="x in obj">
-        <div v-if="x.loading">
-          <div class="ui white label">#{{x.id}}</div>
-          <a class="title has-emoji" href="/gitea/go-sdk/issues/187">Add CRUD methods for repository files</a>
-          <a class="ui label has-emoji"
-            href="/gitea/go-sdk/issues?q=&amp;type=all&amp;state=open&amp;labels=408&amp;milestone=0&amp;assignee=0"
-            style="color: #fff; background-color: #006b75" title="">kind/feature</a>
+        <div v-if="!x.loading">
+          <div class="ui white label">#{{x.id}}</div>  
+          <router-link :to="x.id">
+            <a class="title">{{x.meta.title}}</a>
+          </router-link>
           <p class="desc">
             opened <span class="time-since poping up" title="" data-content="Wed, 14 Aug 2019 15:31:56 UTC"
-              data-variation="inverted tiny">4 months ago</span> by <a href="/mavogel">mavogel</a>
+              data-variation="inverted tiny">4 months ago</span> by 
+            {{x.meta.author.name}}&lt;{{x.meta.author.email}}&gt;
           </p>
         </div>
         <div v-else>
           <div class="ui white label">#{{x.id}}</div>
-          <div>{{x.text}}</div>
+          loading...
         </div>
       </li>
     </table>
