@@ -3,14 +3,18 @@
   <head>
     <title>گزارش یک باگ</title>
     <time>2020-01-08T11:16:37.497Z</time>
+    <author>
+      <name>HKalbasi</name>
+      <email>kalbasi@ce.sharif.edu</email>
+    </author>
   </head>
   <body>
     <comment>
       <author>
         <name>HKalbasi</name>
         <email>kalbasi@ce.sharif.edu</email>
-        <time>2020-01-08T11:16:37.497Z</time>
       </author>
+      <time>2020-01-08T11:16:37.497Z</time>
       <text>
         ایشو ها درست نمایش داده نمی شوند.
       </text>
