@@ -1,0 +1,39 @@
+.issue.list {
+  list-style: none;
+}
+
+.issue.list > .item {
+  padding-top: 15px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #aaa;
+}
+
+.issue.list > .item .title {
+  color: 
+  #444;
+  font-size: 15px;
+  font-weight: 700;
+  margin: 0 6px;
+}
+
+.repository.view.issue .title .index {
+  font-weight: 300;
+  color: #aaa;
+  letter-spacing: -1px;
+}
+
+.comment {
+  margin-bottom: 14px;
+}
+
+
+
+.repository.view.issue .timeline {
+  background: 
+         linear-gradient(to right,
+             rgba(0,0,0,0) 0%,
+             rgba(0,0,0,0) calc(10% - 0.8px),
+             rgba(0,0,0,1) 10%,
+             rgba(0,0,0,0) calc(10% + 0.8px),
+             rgba(0,0,0,0) 100%)
+}
