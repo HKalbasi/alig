@@ -1,33 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<issue>
-  <head>
-    <title>گزارش یک باگ</title>
-    <time>2020-01-08T11:16:37.497Z</time>
-    <author>
-      <name>HKalbasi</name>
-      <email>kalbasi@ce.sharif.edu</email>
-    </author>
-  </head>
-  <body>
-    <comment>
-      <author>
-        <name>HKalbasi</name>
-        <email>kalbasi@ce.sharif.edu</email>
-      </author>
-      <time>2020-01-08T11:16:37.497Z</time>
-      <text>
-        ایشو ها درست نمایش داده نمی شوند.
-      </text>
-    </comment>
-    <comment>
-      <author>
-        <name>HKalbasi</name>
-        <email>kalbasi@ce.sharif.edu</email>
-      </author>
-      <time>2020-01-17T20:01:45.076Z</time>
-      <text>
-        I am working on it
-      </text>
-    </comment>
-  </body>
-</issue>
+head:
+  title: گزارش یک باگ
+  time: 2020-01-08T11:16:37.497Z
+  author:
+    name: HKalbasi
+    email: kalbasi@ce.sharif.edu
+body:
+  - type: comment
+    author:
+      name: HKalbasi
+      email: kalbasi@ce.sharif.edu
+    text:
+      ایشو ها درست نمایش داده نمی شوند.
+  - type: comment
+    author:
+      name: HKalbasi
+      email: kalbasi@ce.sharif.edu
+    text:
+      I am working on it
