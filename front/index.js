@@ -75,7 +75,17 @@ window.cloneURL = `${window.location.protocol}//${window.location.host}/${window
 window.atobUTF8 = (sBase64) => {
 	return Buffer.from(sBase64,'base64').toString('UTF8');
 };
-
+window.timeToTextByNow = (x) => {
+  const prettyDate = (date, startDate) => {
+    var secs = Math.floor((date.getTime() - startDate.getTime()) / 1000);
+    if (secs < 60) return secs + " second ago";
+    if (secs < 3600) return Math.floor(secs / 60) + " minute ago";
+    if (secs < 86400) return Math.floor(secs / 3600) + " hour ago";
+    if (secs < 604800) return Math.floor(secs / 86400) + " day ago";
+    return startDate.toLocaleDateString();
+  };
+  return prettyDate(new Date, x);
+};
 const app = new Vue({
   router
 }).$mount('#app')

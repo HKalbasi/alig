@@ -18,15 +18,19 @@ export const IssuePage = {
       await getFromApi(`byPath/${this.branch}/.issues/${this.issue}`)
     ).data);
     const dom = (new DOMParser()).parseFromString(xml, "text/xml");
-    const d$ = x => dom.querySelector(x);
-    console.log(d$);
+    const d$ = (x, y = dom) => y.querySelector(x);
     this.meta = {
       title: d$('issue head title').innerHTML,
     };
     this.body = Array.from(d$('body').childNodes)
       .filter(x=>x.nodeName !== '#text')
       .map(x => ({
-        text: x.innerHTML,
+				author: {
+					email: d$('author email', x).innerHTML,
+					name:  d$('author name',  x).innerHTML,
+				},
+				time: new Date(d$('time', x).innerHTML),
+        text: d$('text', x).innerHTML,
       }));
     this.loading = false;
   },
@@ -68,12 +72,10 @@ export const IssuePage = {
 					<div class="content">
 						<div class="ui top attached header">
 
-							<span class="text grey"><a href="/HKalbasi">HKalbasi</a> commented <a href="#issuecomment-105059"><span
-										class="time-since poping up" title="" data-content="Fri, 17 Jan 2020 16:08:36 UTC"
-										data-variation="inverted tiny">1 minute ago</span></a></span>
-
-
-
+							<span class="text grey">
+								{{x.author.name}}&lt;{{x.author.email}}&gt; commented
+								{{window.timeToTextByNow(x.time)}}
+							</span>
 						</div>
 
 					</div>
