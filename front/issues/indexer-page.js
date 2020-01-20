@@ -1,8 +1,5 @@
 import { getFromApi } from "../api.mjs";
-import { to_json } from "xmljson";
-import { promisify } from "util";
-
-const xmlToJson = promisify(to_json);
+import YAML from "yaml";
 
 export const IssueIndexerPage = {
   props: ['branch'],
@@ -21,8 +18,8 @@ export const IssueIndexerPage = {
     }));
     console.log(this.obj);
     await Promise.all(res.map(async (x,i) => {
-      const xml = window.atobUTF8((await getFromApi(`byPath/${this.branch}/.issues/${x.name}`)).data);
-      const json = (await xmlToJson(xml)).issue;
+      const yaml = window.atobUTF8((await getFromApi(`byPath/${this.branch}/.issues/${x.name}`)).data);
+      const json = YAML.parse(yaml);
       console.log(json);
       this.$set(this.obj, i , {
         loading: false,

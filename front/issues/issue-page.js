@@ -1,8 +1,5 @@
 import { getFromApi } from "../api.mjs";
-import { to_json } from "xmljson";
-import { promisify } from "util";
-
-const xmlToJson = promisify(to_json);
+import YAML from "yaml";
 
 export const IssuePage = {
   props: ['branch', 'issue'],
@@ -14,25 +11,17 @@ export const IssuePage = {
     };
   },
   mounted: async function () {
-    const xml = window.atobUTF8((
+    const yaml = window.atobUTF8((
       await getFromApi(`byPath/${this.branch}/.issues/${this.issue}`)
-    ).data);
-    const dom = (new DOMParser()).parseFromString(xml, "text/xml");
-    const d$ = (x, y = dom) => y.querySelector(x);
-    this.meta = {
-      title: d$('issue head title').innerHTML,
-    };
-    this.body = Array.from(d$('body').childNodes)
-      .filter(x=>x.nodeName !== '#text')
-      .map(x => ({
-				author: {
-					email: d$('author email', x).innerHTML,
-					name:  d$('author name',  x).innerHTML,
-				},
-				time: new Date(d$('time', x).innerHTML),
-        text: d$('text', x).innerHTML,
-      }));
-    this.loading = false;
+		).data);
+		const json = YAML.parse(yaml);
+		console.log(json);
+    this.meta = json.head;
+    this.body = json.body.map(x => ({
+			...x,
+			time: new Date(x.time),
+		}));
+		this.loading = false;
   },
   template: `<div>
 	<header-root :branch="branch" selectedTab="issues"></header-root>
