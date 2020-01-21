@@ -1,4 +1,7 @@
 import git from "isomorphic-git";
+import fs from "fs";
+
+git.plugins.set('fs', fs);
 
 export const readObject = async (adr, oid) => {
   const { object, type } = await git.readObject({
@@ -25,4 +28,8 @@ export const branchToCommit = async (adr, ref) => {
     gitdir: adr,
     ref,
   });
-}
+};
+
+export const commitFile = async (dir, filepath, message) => {
+  await git.add({dir, filepath});
+};
