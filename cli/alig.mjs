@@ -1,4 +1,3 @@
-import * as issue from "../alig/issue.mjs";
 import commander from "commander";
 import { readIssue } from "../alig/issue.mjs";
 import readLine from "readline";
