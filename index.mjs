@@ -5,15 +5,17 @@ import koaSend from "koa-send";
 import cgi from "cgi";
 import path from "path";
 
+const __dirname = path.dirname(new URL(import.meta.url).pathname);
+
 const repoPath = path.resolve(process.argv[2]);
 const restHandler = restHandlerBuilder('', repoPath);
 
 const frontHandler = (new koa()).use(async (ctx) => {
   if (ctx.path.substr(0,6) == '/dist/') {
-    await koaSend(ctx, 'front/dist/'+ctx.path.substr(6));
+    await koaSend(ctx, 'front/dist/'+ctx.path.substr(6), { root: __dirname });
   }
   else {
-    await koaSend(ctx, 'front/index.html');
+    await koaSend(ctx, 'front/index.html', { root: __dirname });
   }
 }).callback();
 
