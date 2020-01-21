@@ -10,12 +10,19 @@ body:
     author:
       name: HKalbasi
       email: kalbasi@ce.sharif.edu
-    text:
-      ایشو ها درست نمایش داده نمی شوند.
+    text: ایشو ها درست نمایش داده نمی شوند.
   - type: comment
     time: 2020-01-17T20:01:45.076Z
     author:
       name: HKalbasi
       email: kalbasi@ce.sharif.edu
-    text:
-      I am working on it
+    text: I am working on it
+  - type: comment
+    time: 2020-01-21T10:07:19.618Z
+    author:
+      name: HKalbasi
+      email: kalbasi@ce.sharif.edu
+    text: |-
+      almost ready, but there is some problems:
+      * show markdown
+      * show other objects such as closed, adding label or ...
