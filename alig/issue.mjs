@@ -9,7 +9,9 @@ process.on('unhandledRejection', up => { throw up; });
 const writeFile = promisify(fs.writeFile);
 const readFile = promisify(fs.readFile);
 
-const commitFile = async (dir, filepath, message, author) => {
+const writeAndCommitIssue = async (json, dir, filepath, message, author) => {
+  const yaml = YAML.stringify(json);
+  await writeFile(address, yaml);
   await git.add({dir, filepath});
   await git.commit({dir, message, author, committer: aligGitAccount});
 };
@@ -28,9 +30,8 @@ export const addComment = async ({id, text, author}) => {
     author,
     text,
   });
-  const result = YAML.stringify(json);
-  await writeFile(address, result);
-  await commitFile(
+  await writeAndCommitIssue(
+    json,
     ".",
     address,
     `alig: add comment ${json.body.length} to #${id}`,
