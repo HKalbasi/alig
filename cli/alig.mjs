@@ -7,7 +7,7 @@ const main = async () => {
     .command('issue <id>')
     .description('show issue with id <id>')
     .action((id) => {
-      console.log(id);
+      
     });
   program.parse(process.argv);
 };

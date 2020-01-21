@@ -14,10 +14,14 @@ const commitFile = async (dir, filepath, message, author) => {
   await git.commit({dir, message, author, committer: aligGitAccount});
 };
 
-export const addComment = async ({id, text, author}) => {
+export const readIssue = async(id) => {
   const address = `.issues/${id}`;
   const yaml = (await readFile(address)).toString();
-  const json = YAML.parse(yaml);
+  return YAML.parse(yaml);
+};
+
+export const addComment = async ({id, text, author}) => {
+  const json = await readIssue(id);
   json.body.push({
     type: 'comment',
     time: (new Date).toJSON(),

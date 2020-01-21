@@ -1,5 +1,7 @@
 import { getFromApi } from "../api.mjs";
 import YAML from "yaml";
+import markdownBuilder from "markdown-it";
+const markdown = new markdownBuilder();
 
 export const IssuePage = {
   props: ['branch', 'issue'],
@@ -16,10 +18,12 @@ export const IssuePage = {
 		).data);
 		const json = YAML.parse(yaml);
 		console.log(json);
+		console.log(markdown);
     this.meta = json.head;
     this.body = json.body.map(x => ({
 			...x,
 			time: new Date(x.time),
+			text: markdown.render(x.text),
 		}));
 		this.loading = false;
   },
@@ -69,8 +73,7 @@ export const IssuePage = {
 
 					</div>
 					<div class="ui attached segment">
-						<div class="render-content markdown has-emoji">
-							{{x.text}}
+						<div v-html="x.text" class="render-content markdown has-emoji">
 						</div>
 					</div>
 
