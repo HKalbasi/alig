@@ -30,6 +30,4 @@ export const branchToCommit = async (adr, ref) => {
   });
 };
 
-export const commitFile = async (dir, filepath, message) => {
-  await git.add({dir, filepath});
-};
+export { git };
