@@ -4,6 +4,7 @@ head:
   author:
     name: HKalbasi
     email: kalbasi@ce.sharif.edu
+  status: open
 body:
   - type: comment
     time: 2020-01-08T11:16:37.497Z
