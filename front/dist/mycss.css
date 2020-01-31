@@ -32,8 +32,31 @@
   background: 
          linear-gradient(to right,
              rgba(0,0,0,0) 0%,
-             rgba(0,0,0,0) calc(10% - 0.8px),
-             rgba(0,0,0,1) 10%,
-             rgba(0,0,0,0) calc(10% + 0.8px),
+             rgba(0,0,0,0) calc(10% - 1.8px),
+             #ddd 10%,
+             rgba(0,0,0,0) calc(10% + 1.8px),
              rgba(0,0,0,0) 100%)
+}
+
+.repository.view.issue .timeline .event {
+  margin-left: 10%;
+}
+
+.repository.view.issue .timeline .event .octicon.octicon-circle-slash {
+  font-size: 20px;
+  color: #bd2c00;
+}
+
+.repository.view.issue .timeline .event > .octicon.issue-symbol {
+  font-size: 20px;
+  margin-left: -14px;
+  margin-right: -1px;
+  margin-top: 0 !important;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 28px;
+  background: 
+  #ddd;
 }

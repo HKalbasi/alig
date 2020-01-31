@@ -23,10 +23,13 @@ export const IssuePage = {
 			...json.head,
 			time: new Date(json.head.time),
 		};
-    this.body = json.body.map(x => ({
+    this.body = json.body.map(x => x.type === 'comment' ? ({
 			...x,
 			time: new Date(x.time),
 			text: markdown.render(x.text),
+		}) : ({
+			...x,
+			time: new Date(x.time),
 		}));
 		this.loading = false;
   },
@@ -52,7 +55,12 @@ export const IssuePage = {
 							<span id="issue-title">{{meta.title}}</span>
 						</h1>
 					</div>
-					<div class="ui red large label"><i class="octicon octicon-issue-closed"></i> Closed</div>
+					<div v-if="meta.status==='closed'" class="ui red large label">
+						Closed
+					</div>
+					<div v-else class="ui green large label">
+						Open
+					</div>
 					<span class="time-desc">
 						opened {{window.timeToTextByNow(meta.time)}}
 						by {{meta.author.name}}&lt;{{meta.author.email}}&gt;
@@ -65,19 +73,28 @@ export const IssuePage = {
 			<div class="twelve wide column timeline">
 				<div class="comment" v-for="x in body">
 
-					<div class="content">
-						<div class="ui top attached header">
+					<div v-if="x.type === 'comment'">
+						<div class="content">
+							<div class="ui top attached header">
 
-							<span class="text grey">
-								{{x.author.name}}&lt;{{x.author.email}}&gt; commented
-								{{window.timeToTextByNow(x.time)}}
-							</span>
+								<span class="text grey">
+									{{x.author.name}}&lt;{{x.author.email}}&gt; commented
+									{{window.timeToTextByNow(x.time)}}
+								</span>
+							</div>
+
 						</div>
-
+						<div class="ui attached segment">
+							<div v-html="x.text" class="render-content markdown has-emoji">
+							</div>
+						</div>
 					</div>
-					<div class="ui attached segment">
-						<div v-html="x.text" class="render-content markdown has-emoji">
-						</div>
+					<div v-if="x.type==='event'" class="event">
+						<span class="octicon octicon-circle-slash issue-symbol"></span>
+						<span class="text grey">
+						{{x.author.name}}&lt;{{x.author.email}}&gt; closed this
+						{{window.timeToTextByNow(x.time)}}
+						</span>
 					</div>
 
 				</div>
