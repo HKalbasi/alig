@@ -19,7 +19,10 @@ export const IssuePage = {
 		const json = YAML.parse(yaml);
 		console.log(json);
 		console.log(markdown);
-    this.meta = json.head;
+    this.meta = {
+			...json.head,
+			time: new Date(json.head.time),
+		};
     this.body = json.body.map(x => ({
 			...x,
 			time: new Date(x.time),
@@ -51,10 +54,10 @@ export const IssuePage = {
 					</div>
 					<div class="ui red large label"><i class="octicon octicon-issue-closed"></i> Closed</div>
 					<span class="time-desc">
-						opened <span class="time-since poping up" title="" data-content="Mon, 06 Jan 2020 01:15:25 UTC"
-							data-variation="inverted tiny">1 week ago</span> by <a href="/6543">6543</a>
+						opened {{window.timeToTextByNow(meta.time)}}
+						by {{meta.author.name}}&lt;{{meta.author.email}}&gt;
 						·
-						0 comments
+						{{body.length}} comments
 					</span>
 				</div>
 			</div>
