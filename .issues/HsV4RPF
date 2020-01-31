@@ -4,7 +4,7 @@ head:
   author:
     name: HKalbasi
     email: kalbasi@ce.sharif.edu
-  status: open
+  status: closed
 body:
   - type: comment
     time: 2020-01-08T11:16:37.497Z
@@ -33,3 +33,9 @@ body:
       name: HKalbasi
       email: kalbasi@ce.sharif.edu
     text: markdown fixed.
+  - type: event
+    time: 2020-01-31T14:00:36.374Z
+    author:
+      name: HKalbasi
+      email: kalbasi@ce.sharif.edu
+    description: closed
