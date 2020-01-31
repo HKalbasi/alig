@@ -26,3 +26,9 @@ body:
       almost ready, but there is some problems:
       * show markdown
       * show other objects such as closed, adding label or ...
+  - type: comment
+    time: 2020-01-31T13:00:11.459Z
+    author:
+      name: HKalbasi
+      email: kalbasi@ce.sharif.edu
+    text: markdown fixed.
