@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "lint": "eslint . --ext=.js,.mjs",
+    "lint-fix": "eslint . --fix --ext=.js,.mjs",
     "start": "next start"
   },
   "devDependencies": {
