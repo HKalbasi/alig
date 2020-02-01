@@ -42,8 +42,7 @@ export const IssueIndexerPage = {
             <a class="title">{{x.meta.title}}</a>
           </router-link>
           <p class="desc">
-            opened <span class="time-since poping up" title="" data-content="Wed, 14 Aug 2019 15:31:56 UTC"
-              data-variation="inverted tiny">4 months ago</span> by 
+            opened <time-by-now :time="x.meta.time"></time-by-now> by 
             {{x.meta.author.name}}&lt;{{x.meta.author.email}}&gt;
           </p>
         </div>

@@ -8,6 +8,7 @@ import { FileTable } from "./files/file-table.js";
 import { FilePage } from "./files/file-page.js";
 import { IssueIndexerPage } from "./issues/indexer-page.js";
 import { IssuePage } from "./issues/issue-page.js";
+import { timeByNow } from "./util/time-by-now.js";
 
 Vue.use(VueRouter);
 Vue.component('header-root', HeaderRoot);
@@ -16,6 +17,7 @@ Vue.component('file-table', FileTable);
 Vue.component('file-page', FilePage);
 Vue.component('issue-indexer-page', IssueIndexerPage);
 Vue.component('issue-page', IssuePage);
+Vue.component('time-by-now', timeByNow);
 
 window.pathJoin = (x) => x.join('/').replace(/\/+/g, '/');
 
