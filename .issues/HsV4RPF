@@ -39,3 +39,9 @@ body:
       name: HKalbasi
       email: kalbasi@ce.sharif.edu
     description: closed
+  - type: comment
+    time: 2020-02-01T08:16:14.388Z
+    author:
+      name: hamid
+      email: kalbasi@ce.sharif.edu
+    text: test comment after closing issue.
