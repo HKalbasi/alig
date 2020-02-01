@@ -2,7 +2,7 @@ import { readIssue } from "./main.mjs";
 import { promisify } from "util";
 import editor from "editor";
 import fs from "fs";
-import { readConfig } from "../gitEngine/globalConfig.mjs";
+import { readConfig } from "../../gitEngine/globalConfig.mjs";
 
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);

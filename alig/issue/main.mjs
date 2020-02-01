@@ -1,8 +1,8 @@
 import YAML from "yaml";
 import fs from "fs";
 import { promisify } from "util";
-import { git } from "../gitEngine/wrapper.mjs";
-import { aligGitAccount } from "../constants/aligGitAccount.mjs";
+import { git } from "../../gitEngine/wrapper.mjs";
+import { aligGitAccount } from "../../constants/aligGitAccount.mjs";
 
 process.on('unhandledRejection', up => { throw up; });
 
