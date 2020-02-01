@@ -1,6 +1,4 @@
 import commander from "commander";
-import { readIssue, addComment } from "../alig/issue/main.mjs";
-import { git } from "../gitEngine/wrapper.mjs";
 import readLine from "readline";
 import { issueCliBuilder } from "../alig/issue/cli.mjs";
 
@@ -32,4 +30,5 @@ const main = async () => {
   program.parse(process.argv);
 };
 
+// eslint-disable-next-line toplevel/no-toplevel-side-effect
 main();
