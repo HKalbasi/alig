@@ -13,21 +13,21 @@ const getFromConfigString = (config, path) => {
   const [a, b] = path.split('.');
   let l = false;
   const ts = config.split('\n');
-  for (let i = 0; i < ts.length; i++) {
+  for (let i = 0; i < ts.length; i += 1) {
     const e = ts[i];
     if (e.charAt(0) === '[') {
       l = (e.slice(1, -1) === a);
-      continue;
-    }
-    if (!l) continue;
-    const [key, value] = e.split(' = ');
-    if (key.replace(/\s/g, '') === b) {
-      return value;
+    } else if (l) {
+      const [key, value] = e.split(' = ');
+      if (key.replace(/\s/g, '') === b) {
+        return value;
+      }
     }
   }
+  return undefined;
 };
 
-export const readConfig = async (x, gitpath) => {
+export const readConfig = async (x) => {
   const config = (await readFile(`${homedir()}/.gitconfig`)).toString();
   return getFromConfigString(config, x);
 };
