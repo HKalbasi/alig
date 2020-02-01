@@ -1,3 +1,7 @@
+/* eslint-disable immutable/no-mutation */
+/* eslint-disable immutable/no-this */
+/* eslint-disable func-names */
+/* eslint-disable prefer-arrow/prefer-arrow-functions */
 import { getFromApi } from "../api.mjs";
 
 export const FileTable = {
