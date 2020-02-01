@@ -7,12 +7,7 @@ const main = async () => {
     input: process.stdin,
     output: process.stdout,
   });
-  const question = (q) => {
-    return new Promise((res) => {
-      rl.question(q, res);
-    });
-  };
-  const { viewIssue } = issueCliBuilder(rl);
+  const { viewIssue, create } = issueCliBuilder(rl);
   const program = new commander.Command();
   program
     .command('issue')
@@ -21,11 +16,11 @@ const main = async () => {
     .option('-i, --id <id>', 'show issue with specific id')
     .action(async (opt) => {
       if (opt.new) {
-        await question('Enter title: ');
+        await create();
       } else {
         await viewIssue(opt.id);
-        process.exit(0);
       }
+      process.exit(0);
     });
   program.parse(process.argv);
 };

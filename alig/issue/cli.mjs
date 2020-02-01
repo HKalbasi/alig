@@ -1,4 +1,4 @@
-import { readIssue, addComment } from "./main.mjs";
+import { readIssue, addComment, createIssue } from "./main.mjs";
 import { promisify } from "util";
 import editor from "editor";
 import fs from "fs";
@@ -31,17 +31,18 @@ export const issueCliBuilder = (rl) => {
     if (r === '') return d;
     return r;
   };
+  const readAuthor = async () => ({
+    name: await questionWithDefault(
+      'Enter your name',
+      await readConfig("user.name", '.'),
+    ),
+    email: await questionWithDefault(
+      'Enter your email',
+      await readConfig("user.email", '.'),
+    ),
+  });
   const addCommentCli = async (id) => {
-    const author = {
-      name: await questionWithDefault(
-        'Enter your name',
-        await readConfig("user.name", '.'),
-      ),
-      email: await questionWithDefault(
-        'Enter your email',
-        await readConfig("user.email", '.'),
-      ),
-    };
+    const author = await readAuthor();
     rl.pause();
     const text = await multilineInput('Now enter issue text in markdown here, then save and close.');
     rl.resume();
@@ -72,7 +73,14 @@ export const issueCliBuilder = (rl) => {
       console.log(e);
     }
   };
+  const create = async () => {
+    const title = await question('Enter title: ');
+    const author = await readAuthor();
+    const id = await createIssue(title, author);
+    await viewIssue(id);
+  };
   return {
     viewIssue,
+    create,
   };
 };
