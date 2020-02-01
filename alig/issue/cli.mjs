@@ -1,4 +1,4 @@
-import { readIssue } from "./main.mjs";
+import { readIssue, addComment } from "./main.mjs";
 import { promisify } from "util";
 import editor from "editor";
 import fs from "fs";
