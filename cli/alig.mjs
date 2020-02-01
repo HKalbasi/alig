@@ -11,7 +11,7 @@ const main = async () => {
   });
   const question = (q) => {
     return new Promise((res) => {
-      rl.question(q,res);
+      rl.question(q, res);
     });
   };
   const { viewIssue } = issueCliBuilder(rl);
@@ -24,8 +24,7 @@ const main = async () => {
     .action(async (opt) => {
       if (opt.new) {
         await question('Enter title: ');
-      }
-      else {
+      } else {
         await viewIssue(opt.id);
         process.exit(0);
       }

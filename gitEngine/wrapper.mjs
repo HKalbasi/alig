@@ -11,7 +11,7 @@ export const readObject = async (adr, oid) => {
   if (type === 'tree') {
     return {
       type: 'tree',
-      data: object.entries.map(({mode, oid, path}) => ({mode, ref: oid, name: path})),
+      data: object.entries.map(({ mode, oid, path }) => ({ mode, ref: oid, name: path })),
     };
   }
   if (type === 'blob') {

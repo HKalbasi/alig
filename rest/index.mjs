@@ -8,7 +8,7 @@ export const restHandlerBuilder = (prefixWithoutRest, gitDir) => {
   const prefix = `${prefixWithoutRest}/rest`;
   const app = new Koa();
   const router = KoaRestRouter({ prefix });
-  
+
   router.resource('object', {
     index: async (ctx) => {
       ctx.body = await objectList(gitDir);
@@ -27,21 +27,20 @@ export const restHandlerBuilder = (prefixWithoutRest, gitDir) => {
     }
   });
   app.use(async (ctx, next) => {
-    if (ctx.url.substr(prefix.length,7) === '/byPath') {
+    if (ctx.url.substr(prefix.length, 7) === '/byPath') {
       const pth = ctx.url.slice(prefix.length + 8).split('/');
       let obj = await getTreeOfBranch(gitDir, pth[0]);
       const list = pth.slice(1);
-      for (let i=0; i<list.length; i++) {
+      for (let i = 0; i < list.length; i++) {
         if (list[i] === '') continue;
         console.log(obj, list[i]);
         if (obj.type !== 'tree') throw new Error("not found");
         const entry = obj.data.find(y => y.name === list[i]);
         if (entry == undefined) throw new Error("not found");
         obj = await readObject(gitDir, entry.ref);
-      };
+      }
       ctx.body = obj;
-    }
-    else {
+    } else {
       await next();
     }
   });

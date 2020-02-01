@@ -7,7 +7,7 @@ import { readConfig } from "../../gitEngine/globalConfig.mjs";
 const readFile = promisify(fs.readFile);
 const writeFile = promisify(fs.writeFile);
 
-const authorToString = ({name, email}) => `${name}<${email}>`;
+const authorToString = ({ name, email }) => `${name}<${email}>`;
 
 const multilineInput = async (init) => {
   const adr = `/tmp/lanate khoda`;
@@ -23,7 +23,7 @@ const multilineInput = async (init) => {
 export const issueCliBuilder = (rl) => {
   const question = (q) => {
     return new Promise((res) => {
-      rl.question(q,res);
+      rl.question(q, res);
     });
   };
   const questionWithDefault = async (q, d) => {
@@ -52,16 +52,15 @@ export const issueCliBuilder = (rl) => {
     });
   };
   const viewIssue = async (id) => {
-    try{
+    try {
       const issue = await readIssue(id);
       console.log(issue.head.title);
-      console.log(`by ${authorToString(issue.head.author.name)} at ${issue.head.time}`);  
+      console.log(`by ${authorToString(issue.head.author.name)} at ${issue.head.time}`);
       issue.body.forEach(e => {
         if (e.type === 'comment') {
           console.log(`${authorToString(e.author)} commented at ${e.time}:`);
           console.log(e.text);
-        }
-        else {
+        } else {
           console.log(e);
         }
       });
@@ -69,12 +68,11 @@ export const issueCliBuilder = (rl) => {
       if (res === 'a') {
         await addCommentCli(id);
       }
-    }
-    catch(e) {
+    } catch (e) {
       console.log(e);
     }
   };
   return {
     viewIssue,
-  }
+  };
 };
