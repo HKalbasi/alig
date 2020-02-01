@@ -1,14 +1,15 @@
+/* eslint-disable immutable/no-mutation */
+/* eslint-disable immutable/no-this */
+/* eslint-disable func-names */
 import { getFromApi } from "../api.mjs";
 import YAML from "yaml";
 
 export const IssueIndexerPage = {
   props: ['branch'],
-  data: function () {
-    return {
-      loading: true,
-      obj: [],
-    };
-  },
+  data: () => ({
+    loading: true,
+    obj: [],
+  }),
   mounted: async function () {
     const res = (await getFromApi(`byPath/${this.branch}/.issues`)).data;
     this.loading = false;

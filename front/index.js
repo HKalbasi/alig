@@ -1,3 +1,5 @@
+/* eslint-disable immutable/no-mutation */
+/* eslint-disable toplevel/no-toplevel-side-effect */
 import VueRouter from "vue-router";
 import Vue from "vue";
 import { HeaderRoot } from "./header/header-root.js";
@@ -25,10 +27,6 @@ const home = {
 `
 <file-page branch="master" path=""></file-page>
 `,
-};
-
-const tree = {
-  template: '<div> here is file {{$route.params.path}} </div>',
 };
 
 const BranchHome = {
@@ -86,7 +84,8 @@ window.timeToTextByNow = (x) => {
   };
   return prettyDate(new Date(), x);
 };
-const app = new Vue({
+
+new Vue({
   router,
 }).$mount('#app');
 
