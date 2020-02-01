@@ -2,7 +2,7 @@ import { getFromApi } from "../api.mjs";
 
 export const FileTable = {
   props: ['branch', 'path'],
-  data: function() {
+  data: function () {
     return {
       loading: true,
       obj: [],
@@ -32,5 +32,5 @@ export const FileTable = {
     <pre>{{window.atobUTF8(obj.data)}}</pre>
   </div>
 </div>
-`
-}
+`,
+};

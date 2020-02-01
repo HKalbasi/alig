@@ -1,7 +1,7 @@
 export const HeaderTabs = {
   props: ['selectedTab', 'branch'],
   methods: {
-    tabCss: function(id) {
+    tabCss: function (id) {
       return (this.selectedTab === id ? 'active ' : '') + 'item';
     },
   },
@@ -38,4 +38,4 @@ export const HeaderTabs = {
 	</div>
 	<div class="ui tabs divider" style="margin-top:0; margin-bottom:20px;"></div>
 </div>`,
-}
+};

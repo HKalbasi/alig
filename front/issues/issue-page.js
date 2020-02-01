@@ -15,23 +15,23 @@ export const IssuePage = {
   mounted: async function () {
     const yaml = window.atobUTF8((
       await getFromApi(`byPath/${this.branch}/.issues/${this.issue}`)
-		).data);
-		const json = YAML.parse(yaml);
-		console.log(json);
-		console.log(markdown);
+    ).data);
+    const json = YAML.parse(yaml);
+    console.log(json);
+    console.log(markdown);
     this.meta = {
-			...json.head,
-			time: new Date(json.head.time),
-		};
+      ...json.head,
+      time: new Date(json.head.time),
+    };
     this.body = json.body.map(x => x.type === 'comment' ? ({
-			...x,
-			time: new Date(x.time),
-			text: markdown.render(x.text),
-		}) : ({
-			...x,
-			time: new Date(x.time),
-		}));
-		this.loading = false;
+      ...x,
+      time: new Date(x.time),
+      text: markdown.render(x.text),
+    }) : ({
+      ...x,
+      time: new Date(x.time),
+    }));
+    this.loading = false;
   },
   template: `<div>
 	<header-root :branch="branch" selectedTab="issues"></header-root>
@@ -101,5 +101,5 @@ export const IssuePage = {
 			</div>
 		</div>
 	</div>
-</div>`
-}
+</div>`,
+};

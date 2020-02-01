@@ -17,11 +17,11 @@ export const IssueIndexerPage = {
       id: x.name,
     }));
     console.log(this.obj);
-    await Promise.all(res.map(async (x,i) => {
+    await Promise.all(res.map(async (x, i) => {
       const yaml = window.atobUTF8((await getFromApi(`byPath/${this.branch}/.issues/${x.name}`)).data);
       const json = YAML.parse(yaml);
       console.log(json);
-      this.$set(this.obj, i , {
+      this.$set(this.obj, i, {
         loading: false,
         id: x.name,
         meta: json.head,
@@ -53,5 +53,5 @@ export const IssueIndexerPage = {
       </li>
     </table>
   </div>
-</div>`
-}
+</div>`,
+};

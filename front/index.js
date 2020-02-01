@@ -3,7 +3,7 @@ import Vue from "vue";
 import { HeaderRoot } from "./header/header-root.js";
 import { HeaderTabs } from "./header/header-tabs.js";
 import { FileTable } from "./files/file-table.js";
-import { FilePage } from "./files/file-page.js"; 
+import { FilePage } from "./files/file-page.js";
 import { IssueIndexerPage } from "./issues/indexer-page.js";
 import { IssuePage } from "./issues/issue-page.js";
 
@@ -15,13 +15,13 @@ Vue.component('file-page', FilePage);
 Vue.component('issue-indexer-page', IssueIndexerPage);
 Vue.component('issue-page', IssuePage);
 
-window.pathJoin = (x) => x.join('/').replace(/\/+/g,'/');
+window.pathJoin = (x) => x.join('/').replace(/\/+/g, '/');
 
 const p404 = {
-  template: '<div> 404 not found </div>'
+  template: '<div> 404 not found </div>',
 };
 const home = {
-  template: 
+  template:
 `
 <file-page branch="master" path=""></file-page>
 `,
@@ -40,14 +40,14 @@ const BranchHome = {
 const IssueHome = {
   template: `
   <issue-indexer-page :branch="$route.params.branch"></issue-indexer-page>
-  `
+  `,
 };
 
 const IssueItem = {
   template: `
   <issue-page :branch="$route.params.branch" :issue="$route.params.id"></issue-page>
-  `
-}
+  `,
+};
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
@@ -60,7 +60,7 @@ const routes = [
   { path: '/:branch/issues/', component: IssueHome },
   { path: '/:branch/issues/:id', component: IssueItem },
   { path: '*', component: p404 },
-]
+];
 
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
@@ -68,26 +68,26 @@ const routes = [
 const router = new VueRouter({
   mode: 'history',
   routes,
-})
+});
 
 window.projectName = 'alig';
 window.cloneURL = `${window.location.protocol}//${window.location.host}/${window.projectName}.git`;
 window.atobUTF8 = (sBase64) => {
-	return Buffer.from(sBase64,'base64').toString('UTF8');
+  return Buffer.from(sBase64, 'base64').toString('UTF8');
 };
 window.timeToTextByNow = (x) => {
   const prettyDate = (date, startDate) => {
-    var secs = Math.floor((date.getTime() - startDate.getTime()) / 1000);
+    const secs = Math.floor((date.getTime() - startDate.getTime()) / 1000);
     if (secs < 60) return secs + " second ago";
     if (secs < 3600) return Math.floor(secs / 60) + " minute ago";
     if (secs < 86400) return Math.floor(secs / 3600) + " hour ago";
     if (secs < 604800) return Math.floor(secs / 86400) + " day ago";
     return startDate.toLocaleDateString();
   };
-  return prettyDate(new Date, x);
+  return prettyDate(new Date(), x);
 };
 const app = new Vue({
-  router
-}).$mount('#app')
+  router,
+}).$mount('#app');
 
 // Now the app has started!
