@@ -5,4 +5,13 @@ head:
     name: HKalbasi
     email: kalbasi@ce.sharif.edu
   status: open
-body: []
+body:
+  - type: comment
+    time: 2020-02-01T12:27:27.122Z
+    author:
+      name: HKalbasi
+      email: kalbasi@ce.sharif.edu
+    text: |-
+      1. show missing object and an endpoint for sending objects
+      1. add a type for merge requests that contain a branch and a commit hash
+      1. support for submit issue in web app
