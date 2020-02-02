@@ -20,18 +20,11 @@ export const IssuePage = {
     const json = YAML.parse(yaml);
     console.log(json);
     console.log(markdown);
-    this.meta = {
-      ...json.head,
-      time: new Date(json.head.time),
-    };
+    this.meta = json.head;
     this.body = json.body.map(x => x.type === 'comment' ? ({
       ...x,
-      time: new Date(x.time),
       text: markdown.render(x.text),
-    }) : ({
-      ...x,
-      time: new Date(x.time),
-    }));
+    }) : (x));
     this.loading = false;
   },
   template: `<div>
@@ -63,7 +56,7 @@ export const IssuePage = {
             Open
           </div>
           <span class="time-desc">
-            opened {{window.timeToTextByNow(meta.time)}}
+            opened <time-by-now :time="meta.time"></time-by-now>
             by {{meta.author.name}}&lt;{{meta.author.email}}&gt;
             ·
             {{body.length}} comments
@@ -80,7 +73,7 @@ export const IssuePage = {
 
                 <span class="text grey">
                   {{x.author.name}}&lt;{{x.author.email}}&gt; commented
-                  {{window.timeToTextByNow(x.time)}}
+                  <time-by-now :time="x.time"></time-by-now>
                 </span>
               </div>
 
@@ -94,7 +87,7 @@ export const IssuePage = {
             <span class="octicon octicon-circle-slash issue-symbol"></span>
             <span class="text grey">
               {{x.author.name}}&lt;{{x.author.email}}&gt; closed this
-              {{window.timeToTextByNow(x.time)}}
+              <time-by-now :time="x.time"></time-by-now>
             </span>
           </div>
 
