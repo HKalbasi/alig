@@ -1,11 +1,11 @@
 /* eslint-disable immutable/no-mutation */
 import http from "http";
-import { restHandlerBuilder } from "./rest/index.mjs";
+import { restHandlerBuilder } from "../rest/index.mjs";
 import Koa from "koa";
 import koaSend from "koa-send";
 import cgi from "cgi";
 import path from "path";
-import { projectRoot } from "./util/rootAddress.mjs";
+import { projectRoot } from "../util/rootAddress.mjs";
 
 const repoPath = path.resolve(process.argv[2]);
 const restHandler = restHandlerBuilder('', repoPath);
