@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import commander from "commander";
 import readLine from "readline";
 import { issueCliBuilder } from "../alig/issue/cli.mjs";

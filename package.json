@@ -1,5 +1,5 @@
 {
-  "name": "gh-in-git",
+  "name": "alig",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -8,6 +8,9 @@
     "lint": "eslint . --ext=.js,.mjs",
     "lint-fix": "eslint . --fix --ext=.js,.mjs",
     "start": "next start"
+  },
+  "bin": {
+    "alig": "./cli/alig.mjs"
   },
   "devDependencies": {
     "eslint": "^6.3.0",
