@@ -1,6 +1,8 @@
 import commander from "commander";
 import readLine from "readline";
 import { issueCliBuilder } from "../alig/issue/cli.mjs";
+import path from "path";
+import { serverBuilder } from "./server.mjs";
 
 const main = async () => {
   const rl = readLine.createInterface({
@@ -10,6 +12,11 @@ const main = async () => {
   const { viewIssue, create } = issueCliBuilder(rl);
   const program = new commander.Command();
   program
+    .command('serve <path>')
+    .description('run alig web server')
+    .action(async (repoPath) => {
+      await serverBuilder(path.resolve(repoPath))();
+    })
     .command('issue')
     .description('show, create or modify issues')
     .option('-n, --new', 'open a new issue')
