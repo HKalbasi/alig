@@ -97,7 +97,13 @@ export const IssuePage = {
               {{window.timeToTextByNow(x.time)}}
             </span>
           </div>
-
+          <div v-if="x.type==='merge-request'">
+            <div class="ui attached segment">
+              {{x.author.name}}&lt;{{x.author.email}}&gt;
+              wants to merge
+              {{x.from}} to {{x.to}}
+            </div>
+          </div>
         </div>
       </div>
     </div>

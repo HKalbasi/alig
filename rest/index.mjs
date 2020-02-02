@@ -1,9 +1,9 @@
 /* eslint-disable immutable/no-mutation */
 import Koa from "koa";
 import KoaRestRouter from "koa-rest-router";
-import { objectList } from "../gitEngine/git.mjs";
 import { readObject } from "../gitEngine/wrapper.mjs";
 import { getTreeOfBranch } from "../gitEngine/shortcut.mjs";
+import { tryMerge } from "../gitEngine/merge.mjs";
 
 export const restHandlerBuilder = (prefixWithoutRest, gitDir) => {
   const prefix = `${prefixWithoutRest}/rest`;
@@ -11,9 +11,9 @@ export const restHandlerBuilder = (prefixWithoutRest, gitDir) => {
   const router = KoaRestRouter({ prefix });
 
   router.resource('object', {
-    index: async (ctx) => {
+    /* index: async (ctx) => {
       ctx.body = await objectList(gitDir);
-    },
+    }, */
     show: async (ctx) => {
       ctx.body = await readObject(gitDir, ctx.params.object);
     },
@@ -41,6 +41,16 @@ export const restHandlerBuilder = (prefixWithoutRest, gitDir) => {
         obj = await readObject(gitDir, entry.ref);
       }
       ctx.body = obj;
+    } else if (ctx.url.substr(prefix.length, 9) === '/tryMerge') {
+      const param = (new URL(ctx.url, 'http://x.y')).searchParams;
+      if (!param.has('ours') || !param.has('theirs')) {
+        ctx.status = 404;
+        ctx.body = 404;
+        return;
+      }
+      const ours = param.get('ours');
+      const theirs = param.get('theirs');
+      ctx.body = await tryMerge(gitDir, ours, theirs);
     } else {
       await next();
     }
