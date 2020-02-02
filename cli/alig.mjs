@@ -18,7 +18,8 @@ const main = async () => {
     .description('run alig web server')
     .action(async (repoPath) => {
       await serverBuilder(path.resolve(repoPath))();
-    })
+    });
+  program
     .command('issue')
     .description('show, create or modify issues')
     .option('-n, --new', 'open a new issue')
