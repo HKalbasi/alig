@@ -11,7 +11,12 @@ export const IssueIndexerPage = {
     obj: [],
   }),
   mounted: async function () {
-    const res = (await getFromApi(`byPath/${this.branch}/.issues`)).data;
+    let res;
+    try {
+      res = (await getFromApi(`byPath/${this.branch}/.issues`)).data;
+    } catch (e) {
+      res = [];
+    }
     this.loading = false;
     this.obj = res.map(x => ({
       loading: true,
@@ -35,7 +40,10 @@ export const IssueIndexerPage = {
   <div class="ui container">
     <div v-if="loading">loading</div>
     <div class="issue list" v-else>
-      <li class="item" v-for="x in obj">
+      <div v-if="obj.length === 0">
+        There is no issue here
+      </div>
+      <li v-else class="item" v-for="x in obj">
         <div v-if="!x.loading">
           <div class="ui white label">#{{x.id}}</div>  
           <router-link :to="x.id">
