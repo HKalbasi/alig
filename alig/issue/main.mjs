@@ -10,6 +10,7 @@ process.on('unhandledRejection', up => { throw up; });
 
 const writeFile = promisify(fs.writeFile);
 const readFile = promisify(fs.readFile);
+const makedir = promisify(fs.mkdir);
 
 const writeAndCommitIssue = async (json, dir, id, message, author) => {
   const yaml = YAML.stringify(json);
@@ -21,6 +22,7 @@ const writeAndCommitIssue = async (json, dir, id, message, author) => {
 };
 
 export const createIssue = async (title, author) => {
+  await makedir('.issues', { recursive: true });
   const k = new Date();
   const id = dateToId(k);
   const json = {
