@@ -5,7 +5,7 @@ import Koa from "koa";
 import koaSend from "koa-send";
 import cgi from "cgi";
 import { projectRoot } from "../util/rootAddress.mjs";
-import { handler as authHandler } from "../plugins/auth/server.mjs";
+import { handlerBuilder as authHandlerBuilder } from "../plugins/auth/server.mjs";
 
 const frontHandler = (new Koa()).use(async (ctx) => {
   if (ctx.path.substr(0, 6) === '/dist/') {
@@ -16,7 +16,8 @@ const frontHandler = (new Koa()).use(async (ctx) => {
 }).callback();
 
 export const serverBuilder = (repoPath) => async () => {
-  const restHandler = restHandlerBuilder('', repoPath);
+  const authHandler = await authHandlerBuilder({ gitDir: repoPath });
+  const restHandler = await restHandlerBuilder('', repoPath);
   const gitSmartHttp = cgi('git', {
     args: ['http-backend'],
     env: {
