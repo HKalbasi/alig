@@ -5,6 +5,7 @@ import Koa from "koa";
 import koaSend from "koa-send";
 import cgi from "cgi";
 import { projectRoot } from "../util/rootAddress.mjs";
+import { handler as authHandler } from "../plugins/auth/server.mjs";
 
 const frontHandler = (new Koa()).use(async (ctx) => {
   if (ctx.path.substr(0, 6) === '/dist/') {
@@ -24,7 +25,9 @@ export const serverBuilder = (repoPath) => async () => {
     },
   });
   const server = http.createServer((req, res) => {
-    if (req.url.substring(0, 5) === '/rest') {
+    if (req.url.substring(0, 5) === '/auth') {
+      authHandler(req, res);
+    } else if (req.url.substring(0, 5) === '/rest') {
       restHandler(req, res);
     } else if (req.url.substring(0, 9) === '/alig.git') {
       const url = req.url.slice(9);
