@@ -4,12 +4,13 @@ import KoaRestRouter from "koa-rest-router";
 import { readObject } from "../gitEngine/wrapper.mjs";
 import { getTreeOfBranch } from "../gitEngine/shortcut.mjs";
 import { tryMerge } from "../gitEngine/merge.mjs";
-import jwt from "jsonwebtoken";
+import { jwtBuilder } from "../config/jwt.mjs";
 
-export const restHandlerBuilder = (prefixWithoutRest, gitDir) => {
+export const restHandlerBuilder = async (prefixWithoutRest, gitDir) => {
   const prefix = `${prefixWithoutRest}/rest`;
   const app = new Koa();
   const router = KoaRestRouter({ prefix });
+  const { verify } = await jwtBuilder(gitDir);
 
   router.resource('object', {
     /* index: async (ctx) => {
@@ -31,7 +32,7 @@ export const restHandlerBuilder = (prefixWithoutRest, gitDir) => {
   app.use(async (ctx, next) => {
     try {
       const token = ctx.request.header.authorization.slice(7);
-      ctx.state.user = jwt.verify(token, 'please change this');
+      ctx.state.user = verify(token);
       console.log(token, ctx.state.user);
     } catch (e) {
       // There is no user
