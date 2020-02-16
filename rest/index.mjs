@@ -45,7 +45,6 @@ export const restHandlerBuilder = async (prefixWithoutRest, gitDir) => {
       let obj = await getTreeOfBranch(gitDir, pth[0]);
       const list = pth.slice(1).filter(x => x !== '');
       for (let i = 0; i < list.length; i += 1) {
-        console.log(obj, list[i]);
         if (obj.type !== 'tree') throw new Error("not found");
         const entry = obj.data.find(y => y.name === list[i]);
         if (entry === undefined) throw new Error("not found");
