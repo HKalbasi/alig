@@ -88,7 +88,10 @@ window.timeToTextByNow = (x) => {
   return prettyDate(new Date(), x);
 };
 
-window.getToken = getToken;
+window.getToken = async () => {
+  const token = await getToken();
+  localStorage.setItem('jwt', token);
+};
 
 new Vue({
   router,
