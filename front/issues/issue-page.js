@@ -98,6 +98,9 @@ export const IssuePage = {
             </div>
           </div>
         </div>
+        <div class="ui warning message">
+          <a @click="window.getToken()">login</a> to join conversation
+        </div>
       </div>
     </div>
   </div>

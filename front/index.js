@@ -9,6 +9,7 @@ import { FilePage } from "./files/file-page.js";
 import { IssueIndexerPage } from "./issues/indexer-page.js";
 import { IssuePage } from "./issues/issue-page.js";
 import { timeByNow } from "./util/time-by-now.js";
+import { getToken } from "../plugins/auth/client.mjs";
 
 Vue.use(VueRouter);
 Vue.component('header-root', HeaderRoot);
@@ -86,6 +87,8 @@ window.timeToTextByNow = (x) => {
   };
   return prettyDate(new Date(), x);
 };
+
+window.getToken = getToken;
 
 new Vue({
   router,
