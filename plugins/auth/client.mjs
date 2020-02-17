@@ -68,7 +68,10 @@ export const getToken = async () => {
     button.onclick = async () => {
       if (mode === 'jwt') {
         document.body.removeChild(div);
-        res(input.value);
+        res({
+          success: true,
+          token: input.value,
+        });
       } else {
         const [name, rest] = input.value.split('<');
         const [email] = rest.split('>');

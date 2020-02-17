@@ -12,6 +12,7 @@ export const IssuePage = {
     loading: true,
     meta: {},
     body: {},
+    user: window.user,
   }),
   mounted: async function () {
     const yaml = window.atobUTF8((
@@ -98,8 +99,11 @@ export const IssuePage = {
             </div>
           </div>
         </div>
-        <div class="ui warning message">
+        <div v-if="!window.user.auth" class="ui warning message">
           <a @click="window.getToken()">login</a> to join conversation
+        </div>
+        <div v-else>
+          comment
         </div>
       </div>
     </div>
