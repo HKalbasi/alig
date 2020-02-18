@@ -12,6 +12,7 @@ import { timeByNow } from "./util/time-by-now.js";
 import { getToken } from "../plugins/auth/client.mjs";
 import { UserLabel } from "./util/user-label.js";
 import { IssueAddItem } from "./issues/add-item.js";
+import { getFromApi } from "./api.mjs";
 
 Vue.use(VueRouter);
 Vue.component('header-root', HeaderRoot);
@@ -93,11 +94,17 @@ window.timeToTextByNow = (x) => {
 };
 
 window.getToken = async () => {
-  const { success, token, data } = await getToken();
+  const { success, token } = await getToken();
   if (!success) return;
   localStorage.setItem('jwt', token);
+  const user = await getFromApi('user/getMe');
+  if (!user.auth) {
+    // eslint-disable-next-line no-alert
+    alert('login failed');
+    return;
+  }
   Vue.set(window.user, 'auth', true);
-  Vue.set(window.user, 'data', data);
+  Vue.set(window.user, 'data', user.data);
 };
 
 window.user = {

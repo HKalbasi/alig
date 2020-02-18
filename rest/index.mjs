@@ -32,10 +32,15 @@ export const restHandlerBuilder = async (prefixWithoutRest, gitDir) => {
   app.use(async (ctx, next) => {
     try {
       const token = ctx.request.header.authorization.slice(7);
-      ctx.state.user = verify(token);
+      ctx.state.user = {
+        data: verify(token),
+        auth: true,
+      };
       console.log(token, ctx.state.user);
     } catch (e) {
-      // There is no user
+      ctx.state.user = {
+        auth: false,
+      };
     }
     await next();
   });
@@ -52,6 +57,8 @@ export const restHandlerBuilder = async (prefixWithoutRest, gitDir) => {
         obj = await readObject(gitDir, entry.ref);
       }
       ctx.body = obj;
+    } else if (ctx.url.substr(prefix.length, 11) === '/user/getMe') {
+      ctx.body = ctx.state.user;
     } else if (ctx.url.substr(prefix.length, 9) === '/tryMerge') {
       const param = (new URL(ctx.url, 'http://x.y')).searchParams;
       if (!param.has('ours') || !param.has('theirs')) {
