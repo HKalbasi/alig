@@ -10,6 +10,8 @@ import { IssueIndexerPage } from "./issues/indexer-page.js";
 import { IssuePage } from "./issues/issue-page.js";
 import { timeByNow } from "./util/time-by-now.js";
 import { getToken } from "../plugins/auth/client.mjs";
+import { UserLabel } from "./util/user-label.js";
+import { IssueAddItem } from "./issues/add-item.js";
 
 Vue.use(VueRouter);
 Vue.component('header-root', HeaderRoot);
@@ -19,6 +21,8 @@ Vue.component('file-page', FilePage);
 Vue.component('issue-indexer-page', IssueIndexerPage);
 Vue.component('issue-page', IssuePage);
 Vue.component('time-by-now', timeByNow);
+Vue.component('user-label', UserLabel);
+Vue.component('issue-add-item', IssueAddItem);
 
 window.pathJoin = (x) => x.join('/').replace(/\/+/g, '/');
 

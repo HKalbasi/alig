@@ -58,7 +58,7 @@ export const IssuePage = {
           </div>
           <span class="time-desc">
             opened <time-by-now :time="meta.time"></time-by-now>
-            by {{meta.author.name}}&lt;{{meta.author.email}}&gt;
+            by <user-label :user="meta.author"></user-label>
             ·
             {{body.length}} comments
           </span>
@@ -73,7 +73,7 @@ export const IssuePage = {
               <div class="ui top attached header">
 
                 <span class="text grey">
-                  {{x.author.name}}&lt;{{x.author.email}}&gt; commented
+                  <user-label :user="x.author"></user-label> commented
                   <time-by-now :time="x.time"></time-by-now>
                 </span>
               </div>
@@ -102,9 +102,8 @@ export const IssuePage = {
         <div v-if="!window.user.auth" class="ui warning message">
           <a @click="window.getToken()">login</a> to join conversation
         </div>
-        <div v-else>
-          comment
-        </div>
+        <issue-add-item v-else>
+        </issue-add-item>
       </div>
     </div>
   </div>

@@ -71,6 +71,10 @@ export const getToken = async () => {
         res({
           success: true,
           token: input.value,
+          data: {
+            name: 'hamid@boz',
+            email: 'boz',
+          },
         });
       } else {
         const [name, rest] = input.value.split('<');
