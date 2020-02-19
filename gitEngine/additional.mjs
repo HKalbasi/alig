@@ -62,7 +62,9 @@ export const addFileToTree = async (gitdir, oid, pathString, dataBad) => {
   return rec(theTree.tree, 0);
 };
 
-export const commitFile = async (gitdir, branch, path, data) => {
+export const commitFile = async ({
+  gitdir, branch, path, data, message, author,
+}) => {
   const oid = await git.resolveRef({
     gitdir,
     ref: branch,
@@ -70,11 +72,23 @@ export const commitFile = async (gitdir, branch, path, data) => {
   const oldTree = (await git.readCommit({ gitdir, oid })).commit.tree;
   const newTree = await addFileToTree(gitdir, oldTree, path, data);
   return git.commit({
+    message,
     gitdir,
+    author,
     ref: branch,
     tree: newTree,
   });
 };
 
 // eslint-disable-next-line toplevel/no-toplevel-side-effect
-commitFile('.git', 'master', 'salam.txt', 'salam');
+commitFile({
+  gitdir: '.git',
+  branch: 'master',
+  path: 'salam.txt',
+  data: 'salam',
+  message: 'add salam file',
+  author: {
+    name: 'hamid',
+    email: 'a@b.c',
+  },
+});
