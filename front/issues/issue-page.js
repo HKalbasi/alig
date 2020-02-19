@@ -28,6 +28,16 @@ export const IssuePage = {
     }) : (x));
     this.loading = false;
   },
+  methods: {
+    async addItem(event) {
+      this.loading = true;
+      await getFromApi('issue/add-item', {
+        ...event,
+        branch: this.branch,
+        id: this.issue,
+      });
+    },
+  },
   template: `<div>
   <header-root :branch="branch" selectedTab="issues"></header-root>
   <div class="ui container">
@@ -102,7 +112,7 @@ export const IssuePage = {
         <div v-if="!window.user.auth" class="ui warning message">
           <a @click="window.getToken()">login</a> to join conversation
         </div>
-        <issue-add-item v-else>
+        <issue-add-item @add-item="addItem" v-else>
         </issue-add-item>
       </div>
     </div>

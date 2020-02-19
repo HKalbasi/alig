@@ -5,6 +5,7 @@ import { readObject } from "../gitEngine/wrapper.mjs";
 import { getTreeOfBranch } from "../gitEngine/shortcut.mjs";
 import { tryMerge } from "../gitEngine/merge.mjs";
 import { jwtBuilder } from "../config/jwt.mjs";
+import { IssueHandler } from "./issue-handler.mjs";
 
 export const restHandlerBuilder = async (prefixWithoutRest, gitDir) => {
   const prefix = `${prefixWithoutRest}/rest`;
@@ -59,6 +60,9 @@ export const restHandlerBuilder = async (prefixWithoutRest, gitDir) => {
       ctx.body = obj;
     } else if (ctx.url.substr(prefix.length, 11) === '/user/getMe') {
       ctx.body = ctx.state.user;
+    } else if (ctx.url.substr(prefix.length, 6) === '/issue') {
+      ctx.url = ctx.url.slice(prefix.length + 7);
+      await IssueHandler(ctx);
     } else if (ctx.url.substr(prefix.length, 9) === '/tryMerge') {
       const param = (new URL(ctx.url, 'http://x.y')).searchParams;
       if (!param.has('ours') || !param.has('theirs')) {
