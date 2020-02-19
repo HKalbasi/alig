@@ -1,7 +1,17 @@
+/* eslint-disable immutable/no-this */
 export const IssueAddItem = {
   data: () => ({
     user: window.user,
+    textareaText: 'Enter comment here',
   }),
+  methods: {
+    sendItem() {
+      this.$emit('add-item', {
+        type: 'comment',
+        text: this.textareaText,
+      });
+    },
+  },
   template: `
 <div>
   <div class="ui top attached header">
@@ -10,8 +20,8 @@ export const IssueAddItem = {
     </span>
   </div>
   <div class="ui attached segment">
-    <textarea></textarea>
-    <button class="ui green button">comment</button>
+    <textarea v-model="textareaText"></textarea>
+    <button class="ui green button" @click="sendItem">comment</button>
   </div>
 </div>
   `,
