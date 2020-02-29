@@ -1,13 +1,9 @@
 
 import { git } from "./wrapper.mjs";
 
-/**
- * @param {String} gitdir
- * @param {String} oid
- * @param {String} pathString
- * @param {String|Buffer} dataBad
- */
-export const addFileToTree = async (gitdir, oid, pathString, dataBad) => {
+export const addFileToTree = async ({
+  gitdir, oid, path: pathString, data: dataBad,
+}) => {
   const data = dataBad instanceof Buffer ? dataBad : Buffer.from(dataBad);
   const path = pathString.split('/');
   const rec = async (tree, i) => {
@@ -62,6 +58,10 @@ export const addFileToTree = async (gitdir, oid, pathString, dataBad) => {
   return rec(theTree.tree, 0);
 };
 
+export const readFileFromTree = async ({ gitdir, oid, path: pathString }) => {
+  const path = pathString.split('/');
+};
+
 export const commitFile = async ({
   gitdir, branch, path, data, message, author,
 }) => {
@@ -70,7 +70,9 @@ export const commitFile = async ({
     ref: branch,
   });
   const oldTree = (await git.readCommit({ gitdir, oid })).commit.tree;
-  const newTree = await addFileToTree(gitdir, oldTree, path, data);
+  const newTree = await addFileToTree({
+    gitdir, oid: oldTree, path, data,
+  });
   return git.commit({
     message,
     gitdir,
