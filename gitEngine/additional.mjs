@@ -75,20 +75,7 @@ export const commitFile = async ({
     message,
     gitdir,
     author,
-    ref: branch,
+    ref: 'refs/heads/' + branch,
     tree: newTree,
   });
 };
-
-// eslint-disable-next-line toplevel/no-toplevel-side-effect
-commitFile({
-  gitdir: '.git',
-  branch: 'master',
-  path: 'salam.txt',
-  data: 'salam',
-  message: 'add salam file',
-  author: {
-    name: 'hamid',
-    email: 'a@b.c',
-  },
-});
