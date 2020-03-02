@@ -46,7 +46,13 @@ export const createIssue = async (title, author) => {
 
 export const readIssue = async (id) => {
   const path = `.issues/${id}`;
-  const yaml = (await readObjectFromTree({ gitdir: '.git', path })).blob.toString();
+  const gitdir = '.git';
+  const { commit: { tree: oid } } = await git.readCommit({
+    gitdir,
+    oid: await git.resolveRef({ gitdir, ref: 'HEAD' }),
+  });
+  console.log(oid, path, gitdir);
+  const yaml = (await readObjectFromTree({ gitdir, path, oid })).blob.toString();
   return YAML.parse(yaml);
 };
 
