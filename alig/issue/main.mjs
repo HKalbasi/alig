@@ -4,12 +4,12 @@ import { promisify } from "util";
 import { git } from "../../gitEngine/wrapper.mjs";
 import { aligGitAccount } from "../../constants/aligGitAccount.mjs";
 import { dateToId } from "../../util/dateToId.mjs";
+import { readObjectFromTree } from "../../gitEngine/additional.mjs";
 
 // eslint-disable-next-line toplevel/no-toplevel-side-effect
 process.on('unhandledRejection', up => { throw up; });
 
 const writeFile = promisify(fs.writeFile);
-const readFile = promisify(fs.readFile);
 const makedir = promisify(fs.mkdir);
 
 const writeAndCommitIssue = async (json, dir, id, message, author) => {
@@ -45,8 +45,8 @@ export const createIssue = async (title, author) => {
 };
 
 export const readIssue = async (id) => {
-  const address = `.issues/${id}`;
-  const yaml = (await readFile(address)).toString();
+  const path = `.issues/${id}`;
+  const yaml = (await readObjectFromTree({ gitdir: '.git', path })).blob.toString();
   return YAML.parse(yaml);
 };
 

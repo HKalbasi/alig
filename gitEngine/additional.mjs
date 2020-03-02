@@ -58,8 +58,21 @@ export const addFileToTree = async ({
   return rec(theTree.tree, 0);
 };
 
-export const readFileFromTree = async ({ gitdir, oid, path: pathString }) => {
+export const readObjectFromTree = async ({ gitdir, oid, path: pathString }) => {
   const path = pathString.split('/');
+  let tree = (await git.readTree({ gitdir, oid }));
+  for (let i = 0; i < path.length; i += 1) {
+    const x = path[i];
+    const o = tree.tree.find(a => a.path === x);
+    if (o === undefined) throw new Error("path not exist");
+    if (o.mode !== '040000') {
+      if (i !== path.length - 1) throw new Error("path not exist");
+      return git.readBlob({ gitdir, oid: o.oid });
+    }
+    // eslint-disable-next-line no-await-in-loop
+    tree = (await git.readTree({ gitdir, oid: o.oid }));
+  }
+  return tree;
 };
 
 export const commitFile = async ({
